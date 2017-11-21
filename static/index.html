@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <!-- From: https://v4-alpha.getbootstrap.com/getting-started/introduction/ -->
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -22,10 +21,10 @@
         <div class="form-group">
           <label for="user-input"></label>
           <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
-          <small id="user-input-help" class="form-text text-muted">Type something here and press submit.</small>
+          <small id="user-input-help" class="form-text text-warning">Type something here and press submit.</small>
         </div>
         
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-warning">Submit</button>
 
         <div class="form-group">
           <label for="output-area"></label>
@@ -33,6 +32,28 @@
         </div>
       </form>
     </div>
+
+    <style>
+        body{
+          background-image: url("simple-dark-wallpaper.jpg");
+          background-size: cover;
+          font-family: "Lucida Console", monospace;
+        }
+        button{
+          font-family: "Lucida Console", monospace;
+         }
+        .form-control{
+          font-family: "Lucida Console", monospace;
+        }
+        h1{
+          font-family: "Lucida Console", monospace;
+          color: #cccccc;
+          text-align: center;
+          padding: 8px;
+        }
+    </style>
+
+
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

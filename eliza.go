@@ -16,7 +16,7 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 	userinput :=  r.URL.Query().Get("value")
 	//Using regexp to match the string hello so that the chat bot can give a response.
 	//Here we match the string case-insensitively.
-	if matched, _:= regexp.MatchString(`(?i).*\bHello|Hi|Hey|\b.*`, userinput);matched{
+	if matched, _:= regexp.MatchString(`(?i).*\bHello\b|\bHi\b|\bHey\b.*`, userinput);matched{
 		fmt.Fprintf(w, "Hello, what is your name?")
 		return 
 	}
@@ -74,6 +74,7 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Tell me why you %s?", topic)		
 		return 
 	}
+	//Here the chat bot will respond with the user saying goodbye.
 	if matched, _:= regexp.MatchString(`(?i).*\bGoodbye|Bye\b.*`,userinput);matched{
 		fmt.Fprintf(w, "Farewell friend, until next time.\n")	
 		return 
