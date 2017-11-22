@@ -23,29 +23,30 @@
           <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
           <small id="user-input-help" class="form-text text-warning">Type something here and press submit.</small>
         </div>
-      
-        
-
+    
         <button type="submit" class="btn btn-warning">Submit</button>
-        
 
-        <div id="outputbox">
-        <div class="form-group">
-          <label for="output-area"></label>
-          <textarea class="form-control" id="output-area" rows="3" disabled></textarea>
+      <div class="outputbox">
+        <div id="list">
+          <ul id = "i/o">
+          </ul>
         </div>
-        </div>
+      </div>
       </form>
     </div>
 
     <style>
+      .outputbox{
+        width: 1090px;
+        border: 5px solid #cccccc;
+        background-color: #cccccc;
+        border-radius: 5px;
+        margin: 10px;
+      }
         body{
           background-image: url("simple-dark-wallpaper.jpg");
           background-size: cover;
           font-family: "Lucida Console", monospace;
-        }
-        .outputbox{
-          
         }
         .button{
           font-family: "Lucida Console", monospace;
@@ -71,12 +72,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
     <script>
-      
-      //Append text to input element
-      function append(id_of_input, text){
-        var input_id = '#'+id_of_input;
-        $('#output-area').val($('#user-input').val() + text);
-      }
+
+      var list = document.getElementById('i/o');
 
       $("#user-input-form").submit(
         function(event) {
@@ -84,8 +81,16 @@
           $.get('/user-input', { value: $('#user-input').val() } )
             .done(function (data) {
             $('#output-area').val(data)
-            append('#user-input', '\n' + $('#output-area').val());
-            })
+            
+            var input = document.createElement('li');
+            input.appendChild(document.createTextNode($('#user-input').val()))
+            list.appendChild(input)
+
+            
+            var output = document.createElement('li');
+            output.appendChild(document.createTextNode(data))
+            list.appendChild(output)
+          })
         });
     </script>
   </body>

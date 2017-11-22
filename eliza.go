@@ -88,8 +88,8 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 
 	strings := []string{
 		"I'm not sure what you are talking about.",
-		"Could you elaborate on that",
-		"I think you are missing the point",
+		"Could you elaborate on that.",
+		"I think you are missing the point.",
 		}
 		response := strings[rand.Intn(len(strings))]
 		fmt.Fprintf(w, response)
