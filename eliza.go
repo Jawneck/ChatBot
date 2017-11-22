@@ -30,7 +30,8 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	//This match allows the user to ask who/what the chat bot is.
-	if matched, _:= regexp.MatchString(`(?i).*\bWho are you|What are you\b.*`,userinput);matched{
+	if matched, _:= regexp.MatchString(`(?i).*\bWho are you|What are you|Whats your name\b.*`,userinput);matched{
+		fmt.Fprintf(w, "My name is Eliza.\n")
 		fmt.Fprintf(w, "I am a chat bot.\n")
 		fmt.Fprintf(w, "What are you?")		
 		return 
@@ -72,6 +73,11 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		match := re.FindStringSubmatch(userinput)
 		topic := match[1]
 		fmt.Fprintf(w, "Tell me why you %s?", topic)		
+		return 
+	}
+	//The chat bot giving a response to the user saying no/nope
+	if matched, _:= regexp.MatchString(`(?i).*No|Nope.*`, userinput);matched{
+		fmt.Fprintf(w, "Why so negative?")
 		return 
 	}
 	//Here the chat bot will respond with the user saying goodbye.

@@ -23,12 +23,17 @@
           <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
           <small id="user-input-help" class="form-text text-warning">Type something here and press submit.</small>
         </div>
+      
         
-        <button type="submit" class="btn btn-warning">Submit</button>
 
+        <button type="submit" class="btn btn-warning">Submit</button>
+        
+
+        <div id="outputbox">
         <div class="form-group">
           <label for="output-area"></label>
           <textarea class="form-control" id="output-area" rows="3" disabled></textarea>
+        </div>
         </div>
       </form>
     </div>
@@ -39,8 +44,14 @@
           background-size: cover;
           font-family: "Lucida Console", monospace;
         }
-        button{
+        .outputbox{
+          
+        }
+        .button{
           font-family: "Lucida Console", monospace;
+          position: relative;
+          bottom: 35.5%;
+          left: 55%;
          }
         .form-control{
           font-family: "Lucida Console", monospace;
@@ -60,12 +71,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
     <script>
+      
+      //Append text to input element
+      function append(id_of_input, text){
+        var input_id = '#'+id_of_input;
+        $('#output-area').val($('#user-input').val() + text);
+      }
+
       $("#user-input-form").submit(
         function(event) {
           event.preventDefault();
           $.get('/user-input', { value: $('#user-input').val() } )
             .done(function (data) {
-              $('#output-area').val(data);
+            $('#output-area').val(data)
+            append('#user-input', '\n' + $('#output-area').val());
             })
         });
     </script>
