@@ -59,6 +59,12 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Have you got anything else to tell me?")		
 		return 
 	}
+	//The chat bot giving a response to the user saying starting sentence with because.
+	if matched, _:= regexp.MatchString(`(?i).*because.*`,userinput);matched{
+		fmt.Fprintf(w, "Okay I see.\n")
+		fmt.Fprintf(w, "Have you got anything else to tell me?")		
+		return 
+	}
 	//The user can state that they like/love something.
 	if matched, _:= regexp.MatchString(`(?i).*\bI like|I love\b.*`,userinput);matched{
 		re := regexp.MustCompile("[I like|I love] (.*)") 
@@ -75,9 +81,19 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Tell me why you %s?", topic)		
 		return 
 	}
-	//The chat bot giving a response to the user saying no/nope
+	//The chat bot giving a response to the user saying no/nope.
 	if matched, _:= regexp.MatchString(`(?i).*No|Nope.*`, userinput);matched{
 		fmt.Fprintf(w, "Why so negative?")
+		return 
+	}	
+	//The chat bot giving a response to the user when they say they are sad/upset.
+	if matched, _:= regexp.MatchString(`(?i).*\bsad|upset\b.*`, userinput);matched{
+		fmt.Fprintf(w, "Tell me why you are sad?")
+		return 
+	}
+	//The chat bot giving a response to the user when they say they are happy/upset.
+	if matched, _:= regexp.MatchString(`(?i).*\bhappy\b.*`, userinput);matched{
+		fmt.Fprintf(w, "Tell me why you are happy?")
 		return 
 	}
 	//Here the chat bot will respond with the user saying goodbye.
