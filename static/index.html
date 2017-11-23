@@ -10,42 +10,32 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   </head>
-  <body>
-  <div class = "wrapper">
-   <div class="container1">
-      <h1>ChatBot</h1>
-    </div>
   
-    <footer class="container2">
-      <!-- Adapted from: https://v4-alpha.getbootstrap.com/components/forms/ -->
-      <form id="user-input-form">
-        <div class="form-group">
-          <label for="user-input"></label>
-          <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
-          <small id="user-input-help" class="form-text text-warning">Type something here and press submit.</small>
-        </div>
-        <div class="button">
-            <button type="submit" class="button">Submit</button>
-        </div>
-      </div>
+  <div class = "wrapper">
+      <h1>ChatBot</h1>
 
-
+    <body>
         <div class="list">
           <ul id = "i/o">
           </ul>
         </div>
       </form>
-    
+
+    </body>
+<div class="footer">
+    <!-- Adapted from: https://v4-alpha.getbootstrap.com/components/forms/ -->
+    <form id="user-input-form">
+      <div class="form-group">
+        <label for="user-input"></label>
+        <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
+        <small id="user-input-help" class="form-text text-warning">Type something here and press submit.</small>
+      </div>
+      <div class="button">
+          <button type="submit" class="button">Submit</button>
+      </div>
+    </div>
   </div>
     <style>
-      /*
-        .outputbox{
-          width: 1090px;
-          border: 5px solid #cccccc;
-          background-color: #cccccc;
-          border-radius: 5px;
-          margin: 10px;
-        }*/
         .wrapper{
           margin-left:10%;
           margin-right:10%;
@@ -54,10 +44,11 @@
           margin-left:10%;
           margin-right:10%;
         }
-        .container2{
+        .footer{
           width:80%;
           bottom:0;
-          position:absolute;
+          position:fixed;
+          overflow:hidden;
         }
         body{
           background-image: url("simple-dark-wallpaper.jpg");
@@ -126,7 +117,15 @@
             output.appendChild(document.createTextNode('Eliza: ' + (data)))
             list.appendChild(output)
           })
+
+          setTimeout(function () {
+            $('html, list').animate({
+              scrollTop: $(window).scrollTop() + 500
+            });
+          },1000);
+
+        
         });
     </script>
-  </body>
+
 </html>
