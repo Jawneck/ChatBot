@@ -14,20 +14,20 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 
 	//The user input is gathered from the user input field in the form residing in index.html
 	userinput :=  r.URL.Query().Get("value")
-	//Using regexp to match the string hello so that the chat bot can give a response.
-	//Here we match the string case-insensitively.
-	if matched, _:= regexp.MatchString(`(?i).*\bHello\b|\bHi\b|\bHey\b.*`, userinput);matched{
-		fmt.Fprintf(w, "Hello, what is your name?")
-		return 
-	}
 	//Here we are taking in every string after the string 'my name is'.
 	//This allows us to then give a response using the name the user has provided. 
-	if matched, _:= regexp.MatchString(`(?i).*\bMy name is\b.*`,userinput);matched{
+	if matched, _:= regexp.MatchString(`(?i).*\bMy name is|Hello my name is\b.*`,userinput);matched{
 		re := regexp.MustCompile("(?i)My name is (.*)") 
 		match := re.FindStringSubmatch(userinput)
 		topic := match[1]
 		fmt.Fprintf(w,"Hello %s!", topic)
 		return
+	}
+	//Using regexp to match the string hello so that the chat bot can give a response.
+	//Here we match the string case-insensitively.
+	if matched, _:= regexp.MatchString(`(?i).*\bHello\b|\bHi\b|\bHey\b.*`, userinput);matched{
+		fmt.Fprintf(w, "Hello, what is your name?")
+		return 
 	}
 	//This match allows the user to ask who/what the chat bot is.
 	if matched, _:= regexp.MatchString(`(?i).*\bWho are you|What are you|Whats your name\b.*`,userinput);matched{

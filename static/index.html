@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   </head>
   <body>
-    <div class="container">
+  <div class = "wrapper">
+   <div class="container1">
       <h1>ChatBot</h1>
     </div>
-
-    <div class="container">
+  
+    <footer class="container2">
       <!-- Adapted from: https://v4-alpha.getbootstrap.com/components/forms/ -->
       <form id="user-input-form">
         <div class="form-group">
@@ -23,19 +24,19 @@
           <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
           <small id="user-input-help" class="form-text text-warning">Type something here and press submit.</small>
         </div>
-
         <div class="button">
-        <button type="submit" class="btn btn-warning">Submit</button>
+            <button type="submit" class="button">Submit</button>
         </div>
+      </div>
 
-        <div id="list">
+
+        <div class="list">
           <ul id = "i/o">
           </ul>
         </div>
-
       </form>
-    </div>
-
+    
+  </div>
     <style>
       /*
         .outputbox{
@@ -45,6 +46,19 @@
           border-radius: 5px;
           margin: 10px;
         }*/
+        .wrapper{
+          margin-left:10%;
+          margin-right:10%;
+        }
+        .list{
+          margin-left:10%;
+          margin-right:10%;
+        }
+        .container2{
+          width:80%;
+          bottom:0;
+          position:absolute;
+        }
         body{
           background-image: url("simple-dark-wallpaper.jpg");
           background-size: cover;
@@ -52,8 +66,12 @@
         }
         .button{
           font-family: "Lucida Console", monospace;
-          padding-bottom: 10px;
-         }
+          text-align: center;
+          width:100%;
+          background-color:#F89406;
+          border-radius: 7px;
+          border:none;
+          }
         .form-control{
           font-family: "Lucida Console", monospace;
         }
@@ -65,16 +83,21 @@
         }
         p:nth-child(2n+1){
         background: #cccccc;
+        border-radius: 7px;
         width: 300px;
         height: 50px;
         clear: both;
+        padding: 5px;
         }
         p:nth-child(2n) {
         background: #cccccc;
+        border-radius: 7px;
         width: 300px;
         height: 50px;
-        float: right;
+        padding: 5px;
+        float:right;
         }
+        
     </style>
 
 
