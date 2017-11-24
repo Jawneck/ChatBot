@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Author: Danielis Joniskis, G00333859 -->
+<!-- Index file which is served to the browswer via http://localhost:8080/ -->
 
 <!-- From: https://v4-alpha.getbootstrap.com/getting-started/introduction/ -->
 <html lang="en">
@@ -17,13 +19,11 @@
       <h1>ChatBot</h1>
     </div>
 
-    <body>
-        <div class="list">
-          <ul id = "i/o">
-          </ul>
-        </div>
-
-
+  <body>
+    <div class="list">
+      <ul id = "i/o">
+      </ul>
+    </div>
 
 <div class="footer">
     <!-- Adapted from: https://v4-alpha.getbootstrap.com/components/forms/ -->
@@ -40,7 +40,7 @@
   </form>
   </div>
 
-  <!-- CSS div styling -->
+  <!-- CSS styling for all the div elements etc -->
     <style>
         .wrapper{
           margin-left:10%;
@@ -83,6 +83,8 @@
           text-align: center;
           padding: 8px;
         }
+        /*https://www.w3schools.com/cssref/sel_nth-child.asp*/
+        /*css for the input and output of the list p elements being printed out*/
         p:nth-child(2n+1){
         background: #cccccc;
         border-radius: 7px;
@@ -109,7 +111,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
     <script>
-
       var list = document.getElementById('i/o');
 
     //A function which takes in the user input upon submit.

@@ -1,4 +1,5 @@
-
+//Chatbot
+//Author: Danielis Joniskis, G00333859
 package main
 
 import (
@@ -81,8 +82,13 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Tell me why you %s?", topic)		
 		return 
 	}
+	//The chat bot giving a response to the user saying I don't know.
+	if matched, _:= regexp.MatchString(`(?i).*\bI don't know|I do not know\b.*`,userinput);matched{
+		fmt.Fprintf(w, "Then maybe you should find out.")		
+		return 
+	}
 	//The chat bot giving a response to the user saying no/nope.
-	if matched, _:= regexp.MatchString(`(?i).*No|Nope.*`, userinput);matched{
+	if matched, _:= regexp.MatchString(`(?i).*\bNo|Nope\b.*`, userinput);matched{
 		fmt.Fprintf(w, "Why so negative?")
 		return 
 	}	
@@ -106,10 +112,7 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 	}
 	//The chat bot responding to the user saying "Can I"
 	if matched, _:= regexp.MatchString(`(?i).*\bCan I\b.*`,userinput);matched{
-		re := regexp.MustCompile("(?i)Can I (.*)") 
-		match := re.FindStringSubmatch(userinput)
-		topic := match[1]
-		fmt.Fprintf(w, "I don't know, maybe you can", topic)		
+		fmt.Fprintf(w, "I don't know, maybe you can")		
 		return 
 	}
 	//The chat bot responding to the user saying "Can we" ______
@@ -120,11 +123,38 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "I don't know, maybe we can %s?", topic)		
 		return 
 	}
+	//The chat bot responding to the user using "why" and "you" in the same sentence.
+	if matched, _:= regexp.MatchString(`(?i).*\bWhy\b.*\bYou\b.*`,userinput);matched{
+		fmt.Fprintf(w, "Why not?")		
+		return 
+	}
+	//The chat bot responding to the user asking Why ____?
+	if matched, _:= regexp.MatchString(`(?i).*\bWhy\b.*`,userinput);matched{
+		re := regexp.MustCompile("(?i)Why (.*)") 
+		match := re.FindStringSubmatch(userinput)
+		topic := match[1]
+		fmt.Fprintf(w, "I don't know, why %s?", topic)		
+		return 
+	}
+	//The chat bot responding to the user using the the word "help".
+	if matched, _:= regexp.MatchString(`(?i).*\bHelp\b.*`,userinput);matched{
+		fmt.Fprintf(w, "If we continue talking, maybe I can help you?")		
+		return 
+	}
+	//The chat bot responding to the user saying lets ____?
+	if matched, _:= regexp.MatchString(`(?i).*\bLets|Let us\b.*`,userinput);matched{
+		re := regexp.MustCompile("(?i)[Lets][Let us] (.*)") 
+		match := re.FindStringSubmatch(userinput)
+		topic := match[1]
+		fmt.Fprintf(w, "Okay, lets %s", topic)		
+		return 
+	}
 	//Here the chat bot will respond with the user saying goodbye.
 	if matched, _:= regexp.MatchString(`(?i).*\bGoodbye|Bye\b.*`,userinput);matched{
 		fmt.Fprintf(w, "Farewell friend, until next time.\n")	
 		return 
 	}
+	//Responses given to the user if the chat bot cannot capture their input.
 	strings := []string{
 		"I'm not sure what you are talking about.",
 		"Could you elaborate on that.",
@@ -135,7 +165,9 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, response)
 }
 
+//main method which accesses the static index file
 func main(){
+	//Psuedo-random seeding using the time 
 	rand.Seed(time.Now().UnixNano())		
 	
 	fs := http.FileServer(http.Dir("static"))
