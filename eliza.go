@@ -96,6 +96,14 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Tell me why you are happy?")
 		return 
 	}
+	//The user can state that they don't like/hate something.
+	if matched, _:= regexp.MatchString(`(?i).*\bYou are|You're\b.*`,userinput);matched{
+		re := regexp.MustCompile("[You|You're] are (.*)") 
+		match := re.FindStringSubmatch(userinput)
+		topic := match[1]
+		fmt.Fprintf(w, "What makes you think that I am %s?", topic)		
+		return 
+	}
 	//Here the chat bot will respond with the user saying goodbye.
 	if matched, _:= regexp.MatchString(`(?i).*\bGoodbye|Bye\b.*`,userinput);matched{
 		fmt.Fprintf(w, "Farewell friend, until next time.\n")	

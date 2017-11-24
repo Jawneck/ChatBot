@@ -21,7 +21,7 @@
         </div>
       </form>
 
-    </body>
+
 <div class="footer">
     <!-- Adapted from: https://v4-alpha.getbootstrap.com/components/forms/ -->
     <form id="user-input-form">
@@ -35,6 +35,8 @@
       </div>
     </div>
   </div>
+
+  <!-- CSS div styling -->
     <style>
         .wrapper{
           margin-left:10%;
@@ -43,17 +45,22 @@
         .list{
           margin-left:10%;
           margin-right:10%;
+          padding-bottom:200px;
         }
         .footer{
           width:80%;
           bottom:0;
           position:fixed;
           overflow:hidden;
+          padding-top:200px;
         }
         body{
           background-image: url("simple-dark-wallpaper.jpg");
           background-size: cover;
           font-family: "Lucida Console", monospace;
+          background-repeat: no-repeat;
+          background-attachment:fixed;
+          margin: auto;
         }
         .button{
           font-family: "Lucida Console", monospace;
@@ -101,6 +108,9 @@
 
       var list = document.getElementById('i/o');
 
+    //A function which takes in the user input upon submit.
+    //It also appends both the input and output to a list.
+    //This is to give the visual of messaging back and forth between user and chatbot.
       $("#user-input-form").submit(
         function(event) {
           event.preventDefault();
@@ -108,24 +118,25 @@
             .done(function (data) {
             $('#output-area').val(data)
             
+            //Appending input to the list.
             var input = document.createElement('p');
             input.appendChild(document.createTextNode('User: '+ $('#user-input').val()))
             list.appendChild(input)
 
-            
+            //Appending output to the list.
             var output = document.createElement('p');
             output.appendChild(document.createTextNode('Eliza: ' + (data)))
             list.appendChild(output)
           })
 
+          //A function which scrolls the page when list reaches the footer (input text area).
+          //Adapted from https://stackoverflow.com/questions/43822323/scroll-down-page-in-100-pixels-with-settimeout
           setTimeout(function () {
-            $('html, list').animate({
-              scrollTop: $(window).scrollTop() + 500
+            $('html, body').animate({
+              scrollTop: $(window).scrollTop() + 200
             });
-          },1000);
-
-        
+          },'slow');
         });
     </script>
-
+    </body>
 </html>
