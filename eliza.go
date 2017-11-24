@@ -96,12 +96,28 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Tell me why you are happy?")
 		return 
 	}
-	//The user can state that they don't like/hate something.
-	if matched, _:= regexp.MatchString(`(?i).*\bYou are|You're\b.*`,userinput);matched{
-		re := regexp.MustCompile("[You|You're] are (.*)") 
+	//The chat bot responding to the user saying "you are" ______
+	if matched, _:= regexp.MatchString(`(?i).*\bYou are\b.*`,userinput);matched{
+		re := regexp.MustCompile("[You] are (.*)") 
 		match := re.FindStringSubmatch(userinput)
 		topic := match[1]
 		fmt.Fprintf(w, "What makes you think that I am %s?", topic)		
+		return 
+	}
+	//The chat bot responding to the user saying "Can I"
+	if matched, _:= regexp.MatchString(`(?i).*\bCan I\b.*`,userinput);matched{
+		re := regexp.MustCompile("(?i)Can I (.*)") 
+		match := re.FindStringSubmatch(userinput)
+		topic := match[1]
+		fmt.Fprintf(w, "I don't know, maybe you can", topic)		
+		return 
+	}
+	//The chat bot responding to the user saying "Can we" ______
+	if matched, _:= regexp.MatchString(`(?i).*\bCan we\b.*`,userinput);matched{
+		re := regexp.MustCompile("(?i)Can we (.*)") 
+		match := re.FindStringSubmatch(userinput)
+		topic := match[1]
+		fmt.Fprintf(w, "I don't know, maybe we can %s?", topic)		
 		return 
 	}
 	//Here the chat bot will respond with the user saying goodbye.
@@ -109,11 +125,11 @@ func userinputhandler(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "Farewell friend, until next time.\n")	
 		return 
 	}
-
 	strings := []string{
 		"I'm not sure what you are talking about.",
 		"Could you elaborate on that.",
 		"I think you are missing the point.",
+		"Maybe you could explain better?",
 		}
 		response := strings[rand.Intn(len(strings))]
 		fmt.Fprintf(w, response)
